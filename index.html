@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initium Combat Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+    <header class="header">
+        <h1>Initium Combat Simulator</h1>
+        <div class="header-stats">
+        </div>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab active" data-tab="combat">Combat</button>
+        <button class="tab" data-tab="simulation">Simulation</button>
+        <button class="tab" data-tab="builder">Character Builder</button>
+        <button class="tab" data-tab="items">Item Builder</button>
+        <button class="tab" data-tab="buffs">Buff Builder</button>
+        <button class="tab" data-tab="presets">Presets</button>
+        <button class="tab" data-tab="data">Import/Export</button>
+    </nav>
+
+    <main class="content">
+        <!-- COMBAT TAB -->
+        <section id="tab-combat" class="tab-content active">
+            <div class="combat-layout">
+                <div class="combat-main">
+                    <div class="combat-arena">
+                        <div class="combatant player">
+                            <div class="combatant-name" id="player-name">Player</div>
+                            <div class="combatant-stats">
+                                <span class="stat-group">
+                                    <span class="stat-label">STR</span>
+                                    <span class="stat-values"><span id="player-str">10</span></span>
+                                </span>
+                                <span class="stat-group">
+                                    <span class="stat-label">DEX</span>
+                                    <span class="stat-values"><span id="player-dex">10</span></span>
+                                </span>
+                                <span class="stat-group">
+                                    <span class="stat-label">INT</span>
+                                    <span class="stat-values"><span id="player-int">10</span></span>
+                                </span>
+                            </div>
+                            <div class="hp-bar">
+                                <div class="hp-fill" id="player-hp-fill"></div>
+                                <span class="hp-text" id="player-hp-text">100/100</span>
+                            </div>
+                            <div class="body-silhouette" id="player-body">
+                                <div class="body-slot helmet" data-slot="helmet" data-char="player">Helmet</div>
+                                <div class="body-slot chest" data-slot="chest" data-char="player">Chest</div>
+                                <div class="body-slot shirt" data-slot="shirt" data-char="player">Shirt</div>
+                                <div class="body-slot gloves" data-slot="gloves" data-char="player">Gloves</div>
+                                <div class="body-slot legs" data-slot="legs" data-char="player">Legs</div>
+                                <div class="body-slot boots" data-slot="boots" data-char="player">Boots</div>
+                                <div class="body-slot mainhand" data-slot="mainhand" data-char="player">M.H.</div>
+                                <div class="body-slot offhand" data-slot="offhand" data-char="player">O.H.</div>
+                                <div class="body-slot necklace" data-slot="necklace" data-char="player">Neck</div>
+                                <div class="body-slot ring1" data-slot="ring1" data-char="player">Ring</div>
+                                <div class="body-slot ring2" data-slot="ring2" data-char="player">Ring</div>
+                            </div>
+                        </div>
+                        <div class="vs-badge">VS</div>
+                        <div class="combatant enemy">
+                            <div class="combatant-name" id="enemy-name">Enemy</div>
+                            <div class="combatant-stats">
+                                <span class="stat-group">
+                                    <span class="stat-label">STR</span>
+                                    <span class="stat-values"><span id="enemy-str">10</span></span>
+                                </span>
+                                <span class="stat-group">
+                                    <span class="stat-label">DEX</span>
+                                    <span class="stat-values"><span id="enemy-dex">10</span></span>
+                                </span>
+                                <span class="stat-group">
+                                    <span class="stat-label">INT</span>
+                                    <span class="stat-values"><span id="enemy-int">10</span></span>
+                                </span>
+                            </div>
+                            <div class="hp-bar">
+                                <div class="hp-fill" id="enemy-hp-fill"></div>
+                                <span class="hp-text" id="enemy-hp-text">100/100</span>
+                            </div>
+                            <div class="body-silhouette" id="enemy-body">
+                                <div class="body-slot helmet" data-slot="helmet" data-char="enemy">Helmet</div>
+                                <div class="body-slot chest" data-slot="chest" data-char="enemy">Chest</div>
+                                <div class="body-slot shirt" data-slot="shirt" data-char="enemy">Shirt</div>
+                                <div class="body-slot gloves" data-slot="gloves" data-char="enemy">Gloves</div>
+                                <div class="body-slot legs" data-slot="legs" data-char="enemy">Legs</div>
+                                <div class="body-slot boots" data-slot="boots" data-char="enemy">Boots</div>
+                                <div class="body-slot mainhand" data-slot="mainhand" data-char="enemy">M.H.</div>
+                                <div class="body-slot offhand" data-slot="offhand" data-char="enemy">O.H.</div>
+                                <div class="body-slot necklace" data-slot="necklace" data-char="enemy">Neck</div>
+                                <div class="body-slot ring1" data-slot="ring1" data-char="enemy">Ring</div>
+                                <div class="body-slot ring2" data-slot="ring2" data-char="enemy">Ring</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="combat-controls">
+                        <button class="btn btn-primary" id="btn-start-combat">Start Combat</button>
+                        <button class="btn btn-action" id="btn-mh-attack" disabled>Main Hand</button>
+                        <button class="btn btn-action" id="btn-oh-attack" disabled>Off Hand</button>
+                        <button class="btn btn-warning" id="btn-flee" disabled>Flee</button>
+                        <button class="btn btn-danger" id="btn-end-combat" disabled>End Combat</button>
+                    </div>
+
+                    <div class="combat-log">
+                        <div class="log-header">Combat Log</div>
+                        <div class="log-content" id="log-content"></div>
+                    </div>
+                </div>
+
+                <div class="combat-preview">
+                    <div class="preview-panel">
+                        <h3>Item Preview</h3>
+                        <div id="combat-item-preview">
+                            <div class="preview-empty">Click a slot to view/change item</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATION TAB -->
+        <section id="tab-simulation" class="tab-content">
+            <div class="sim-layout">
+                <div class="sim-main">
+                    <div class="simulation-config">
+                        <h3>Win Rate Simulation</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Simulations:</label>
+                                <input type="number" id="sim-count" value="1000" min="100" max="100000">
+                            </div>
+                            <div class="form-group">
+                                <label>Max Turns:</label>
+                                <input type="number" id="sim-max-turns" value="500" min="10" max="2000">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="btn-run-simulation">Run Simulation</button>
+                    </div>
+
+                    <div class="simulation-results">
+                        <div class="result-card">
+                            <div class="result-label">Win Rate</div>
+                            <div class="result-value" id="sim-winrate">-</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Avg Turns</div>
+                            <div class="result-value" id="sim-avg-turns">-</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Player Wins</div>
+                            <div class="result-value" id="sim-player-wins">-</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Enemy Wins</div>
+                            <div class="result-value" id="sim-enemy-wins">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sim-summary">
+                    <div class="summary-panel">
+                        <h3>Character Summary</h3>
+                        <div class="summary-tabs">
+                            <button class="summary-tab active" data-summary="player">Player</button>
+                            <button class="summary-tab" data-summary="enemy">Enemy</button>
+                        </div>
+                        <div id="sim-summary-content">
+                            <div class="summary-empty">Click "Player" or "Enemy" to view gear</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHARACTER BUILDER TAB -->
+        <section id="tab-builder" class="tab-content">
+            <div class="builder-layout">
+                <!-- LEFT: Character Editors -->
+                <div class="builder-main">
+                    <div class="builder-columns">
+                        <!-- PLAYER EDITOR -->
+                        <div class="builder-panel">
+                            <h3>Player Character</h3>
+                            <div class="char-stats-row">
+                                <div class="form-group flex-2">
+                                    <label>Name:</label>
+                                    <input type="text" id="player-name-input" value="Player">
+                                </div>
+                                <div class="form-group">
+                                    <label>HP:</label>
+                                    <input type="number" id="player-hp-input" value="100">
+                                </div>
+                            </div>
+                            <div class="char-stats-row">
+                                <div class="form-group">
+                                    <label>STR:</label>
+                                    <input type="number" id="player-str-input" value="10" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>DEX:</label>
+                                    <input type="number" id="player-dex-input" value="10" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>INT:</label>
+                                    <input type="number" id="player-int-input" value="10" step="0.1">
+                                </div>
+                            </div>
+                            <div class="gear-grid cols-3" id="player-gear"></div>
+                            <div class="buff-section">
+                                <h4>Active Buffs</h4>
+                                <div class="buff-grid" id="player-buffs"></div>
+                            </div>
+                            <button class="btn btn-primary" id="btn-save-player">Save Player</button>
+                        </div>
+
+                        <!-- ENEMY EDITOR -->
+                        <div class="builder-panel">
+                            <h3>Enemy Character</h3>
+                            <div class="char-stats-row">
+                                <div class="form-group flex-2">
+                                    <label>Name:</label>
+                                    <input type="text" id="enemy-name-input" value="Enemy">
+                                </div>
+                                <div class="form-group">
+                                    <label>HP:</label>
+                                    <input type="number" id="enemy-hp-input" value="100">
+                                </div>
+                            </div>
+                            <div class="char-stats-row">
+                                <div class="form-group">
+                                    <label>STR:</label>
+                                    <input type="number" id="enemy-str-input" value="10" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>DEX:</label>
+                                    <input type="number" id="enemy-dex-input" value="10" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>INT:</label>
+                                    <input type="number" id="enemy-int-input" value="10" step="0.1">
+                                </div>
+                            </div>
+                            <div class="gear-grid cols-3" id="enemy-gear"></div>
+                            <div class="buff-section">
+                                <h4>Active Buffs</h4>
+                                <div class="buff-grid" id="enemy-buffs"></div>
+                            </div>
+                            <button class="btn btn-danger" id="btn-save-enemy">Save Enemy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Search Panel -->
+                <div class="builder-preview">
+                    <div class="search-panel">
+                        <h3>Item Search</h3>
+                        <div class="form-group">
+                            <input type="text" id="item-search-input" placeholder="Search items...">
+                        </div>
+                        <div class="search-filters">
+                            <label><input type="checkbox" id="filter-weapons" checked> Weapons</label>
+                            <label><input type="checkbox" id="filter-armor" checked> Armor</label>
+                            <label><input type="checkbox" id="filter-shields" checked> Shields</label>
+                        </div>
+                        <div id="search-results" class="search-results"></div>
+                    </div>
+                    <div class="preview-panel" style="margin-top: 16px;">
+                        <h3>Item Preview</h3>
+                        <div id="item-preview">
+                            <div class="preview-empty">Select an item to preview</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ITEM BUILDER TAB -->
+        <section id="tab-items" class="tab-content">
+            <div class="items-layout">
+                <div class="item-editor">
+                    <h3>Create Custom Item</h3>
+                    <div class="form-group">
+                        <label>Item Name:</label>
+                        <input type="text" id="item-name-input" placeholder="My Custom Item">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Type:</label>
+                            <select id="item-type-input">
+                                <option value="weapon">Weapon</option>
+                                <option value="armor">Armor</option>
+                                <option value="shield">Shield</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Slot:</label>
+                            <select id="item-slot-input">
+                                <option value="hand">Hand</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Block Chance (%):</label>
+                            <input type="number" id="item-bc-input" value="50" min="0" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label>Damage Reduction:</label>
+                            <input type="number" id="item-dr-input" value="10" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Durability:</label>
+                            <input type="number" id="item-dura-input" value="100" min="1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Resistances (Bludgeoning/Piercing/Slashing):</label>
+                        <div class="resist-row">
+                            <select id="item-resist-b-input">
+                                <option value="E">B: Excellent</option>
+                                <option value="G">B: Good</option>
+                                <option value="A" selected>B: Average</option>
+                                <option value="P">B: Poor</option>
+                                <option value="M">B: Minimal</option>
+                                <option value="N">B: None</option>
+                            </select>
+                            <select id="item-resist-p-input">
+                                <option value="E">P: Excellent</option>
+                                <option value="G">P: Good</option>
+                                <option value="A" selected>P: Average</option>
+                                <option value="P">P: Poor</option>
+                                <option value="M">P: Minimal</option>
+                                <option value="N">P: None</option>
+                            </select>
+                            <select id="item-resist-s-input">
+                                <option value="E">S: Excellent</option>
+                                <option value="G">S: Good</option>
+                                <option value="A" selected>S: Average</option>
+                                <option value="P">S: Poor</option>
+                                <option value="M">S: Minimal</option>
+                                <option value="N">S: None</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>STR Modifier:</label>
+                            <input type="number" id="item-str-input" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>DEX Penalty:</label>
+                            <input type="number" id="item-dex-input" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>INT Modifier:</label>
+                            <input type="number" id="item-int-input" value="0">
+                        </div>
+                    </div>
+
+                    <div class="weapon-stats" id="weapon-stats-section">
+                        <h4>Weapon Stats</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Num Dice:</label>
+                                <input type="number" id="item-numdice-input" value="1" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Die Size:</label>
+                                <input type="number" id="item-diesize-input" value="8" min="1">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Crit Multiplier:</label>
+                                <input type="number" id="item-critmult-input" value="2" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Crit Chance (%):</label>
+                                <input type="number" id="item-critchance-input" value="10">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-3">
+                                <label>Damage Type:</label>
+                                <select id="item-damagetype-input">
+                                    <option value="B">Bludgeoning</option>
+                                    <option value="P">Piercing</option>
+                                    <option value="S">Slashing</option>
+                                    <option value="BP">Bludgeoning/Piercing</option>
+                                    <option value="BS">Bludgeoning/Slashing</option>
+                                    <option value="PS">Piercing/Slashing</option>
+                                    <option value="BPS">All Types</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1" style="display: flex; align-items: flex-end; padding-bottom: 8px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    Two-Handed
+                                    <input type="checkbox" id="item-twohanded-input" style="margin: 0;">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="covers-slots-section">
+                        <label>Also Covers Slots:</label>
+                        <div class="covers-slots-row">
+                            <label><input type="checkbox" class="covers-slot-check" value="helmet"> Helmet</label>
+                            <label><input type="checkbox" class="covers-slot-check" value="chest"> Chest</label>
+                            <label><input type="checkbox" class="covers-slot-check" value="shirt"> Shirt</label>
+                            <label><input type="checkbox" class="covers-slot-check" value="legs"> Legs</label>
+                            <label><input type="checkbox" class="covers-slot-check" value="gloves"> Gloves</label>
+                            <label><input type="checkbox" class="covers-slot-check" value="boots"> Boots</label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="btn-create-item">Create Item</button>
+                        <button class="btn btn-secondary" id="btn-clear-item">Clear</button>
+                    </div>
+                </div>
+
+                <div class="custom-items">
+                    <h3>My Custom Items</h3>
+                    <div class="items-list" id="custom-items-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BUFF BUILDER TAB -->
+        <section id="tab-buffs" class="tab-content">
+            <div class="buffs-layout">
+                <div class="buff-editor">
+                    <h3>Create Custom Buff</h3>
+                    <div class="form-group">
+                        <label>Buff Name:</label>
+                        <input type="text" id="buff-name-input" placeholder="My Custom Buff">
+                    </div>
+                    <div class="form-group">
+                        <label>Stat Affected:</label>
+                        <select id="buff-stat-input">
+                            <option value="str">Strength</option>
+                            <option value="dex">Dexterity</option>
+                            <option value="int">Intelligence</option>
+                            <option value="hp">Max HP</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Flat Bonus:</label>
+                            <input type="number" id="buff-flat-input" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Percent Bonus:</label>
+                            <input type="number" id="buff-pct-input" value="0">
+                        </div>
+                    </div>
+                    <div class="buff-preview" id="buff-preview">Preview: +0 flat / +0%</div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="btn-create-buff">Create Buff</button>
+                        <button class="btn btn-secondary" id="btn-clear-buff">Clear</button>
+                    </div>
+                </div>
+
+                <div class="custom-buffs">
+                    <h3>My Custom Buffs</h3>
+                    <div class="buffs-list" id="custom-buffs-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESETS TAB -->
+        <section id="tab-presets" class="tab-content">
+            <div class="presets-layout">
+                <div class="presets-sidebar">
+                    <h3>Load Preset</h3>
+                    <div class="form-group">
+                        <label>Type:</label>
+                        <select id="preset-type-input">
+                            <option value="loadout">Player Loadout</option>
+                            <option value="enemy">Enemy Preset</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Select:</label>
+                        <select id="preset-list-input" size="8"></select>
+                    </div>
+                    <div class="btn-row">
+                        <button class="btn btn-primary btn-small" id="btn-load-preset">Load</button>
+                        <button class="btn btn-danger btn-small" id="btn-delete-preset">Delete</button>
+                    </div>
+                </div>
+
+                <div class="presets-main">
+                    <h3>Save Current as Preset</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Preset Name:</label>
+                            <input type="text" id="preset-name-input" placeholder="My Preset">
+                        </div>
+                        <div class="form-group">
+                            <label>Type:</label>
+                            <select id="preset-save-type-input">
+                                <option value="loadout">Player Loadout</option>
+                                <option value="enemy">Enemy Preset</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="btn-save-preset">Save Preset</button>
+
+                    <h3 style="margin-top: 30px;">Enemy Presets</h3>
+                    <div class="enemy-cards" id="enemy-cards"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IMPORT/EXPORT TAB -->
+        <section id="tab-data" class="tab-content">
+            <div class="data-layout">
+                <div class="data-section">
+                    <h3>Export Data</h3>
+                    <p>Download all your presets, custom items, and buffs.</p>
+                    <button class="btn btn-primary" id="btn-export">Export to JSON</button>
+                </div>
+
+                <div class="data-section">
+                    <h3>Import Data</h3>
+                    <p>Load presets and data from a previously exported JSON file.</p>
+                    <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                    <button class="btn btn-primary" id="btn-import">Import from JSON</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

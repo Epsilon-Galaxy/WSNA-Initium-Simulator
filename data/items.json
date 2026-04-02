@@ -1,0 +1,720 @@
+{
+  "slots": {
+    "helmet": {"display": "Helmet", "hitChance": 0.10},
+    "chest": {"display": "Chest", "hitChance": 0.50},
+    "shirt": {"display": "Shirt", "hitChance": 0},
+    "legs": {"display": "Legs", "hitChance": 0.30},
+    "gloves": {"display": "Gloves", "hitChance": 0.05},
+    "boots": {"display": "Boots", "hitChance": 0.05},
+    "mainhand": {"display": "Main Hand", "hitChance": 0},
+    "offhand": {"display": "Off Hand", "hitChance": 0},
+    "necklace": {"display": "Necklace", "hitChance": 0},
+    "ring1": {"display": "Ring 1", "hitChance": 0},
+    "ring2": {"display": "Ring 2", "hitChance": 0}
+  },
+  "resistLevels": {
+    "E": {"name": "Excellent", "multiplier": 2.0},
+    "G": {"name": "Good", "multiplier": 1.5},
+    "A": {"name": "Average", "multiplier": 1.0},
+    "P": {"name": "Poor", "multiplier": 0.75},
+    "M": {"name": "Minimal", "multiplier": 0.5},
+    "N": {"name": "None", "multiplier": 0.0}
+  },
+  "damageTypes": ["B", "P", "S", "BP", "BS", "PS", "BPS", "T"],
+  "damageTypeNames": {
+    "B": "Bludgeoning",
+    "P": "Piercing",
+    "S": "Slashing",
+    "BP": "Bludgeoning/Piercing",
+    "BS": "Bludgeoning/Slashing",
+    "PS": "Piercing/Slashing",
+    "BPS": "All Types",
+    "T": "Typeless"
+  },
+  "categories": {
+    "weapons": {
+      "display": "Weapons",
+      "slots": ["hand", "mainhand", "offhand"],
+      "statRanges": {
+        "numDice": {"min": 1, "max": 100},
+        "dieSize": {"min": 1, "max": 100},
+        "critMultiplier": {"min": 0.0, "max": 100.0},
+        "critChance": {"min": -25, "max": 100},
+        "durability": {"min": 1, "max": 10000}
+      }
+    },
+    "armor": {
+      "display": "Armor",
+      "slots": ["helmet", "chest", "shirt", "legs", "gloves", "boots"],
+      "statRanges": {
+        "blockChance": {"min": 0.0, "max": 1.0},
+        "damageReduction": {"min": 0, "max": 100},
+        "durability": {"min": 1, "max": 10000}
+      }
+    },
+    "accessories": {
+      "display": "Accessories",
+      "slots": ["necklace", "ring1", "ring2"],
+      "statRanges": {
+        "blockChance": {"min": 0.0, "max": 100.0},
+        "damageReduction": {"min": 0, "max": 100},
+        "durability": {"min": 1, "max": 10000}
+      }
+    }
+  },
+  "weapons": [
+    {
+      "name": "Aurora",
+      "numDice": 3,
+      "dieSize": 12,
+      "critMultiplier": 3.0,
+      "critChance": 8,
+      "damageType": "PS",
+      "durability": 1243,
+      "isTwoHanded": false,
+      "blockChance": 0.24,
+      "damageReduction": 10,
+      "resistB": "P",
+      "resistP": "A",
+      "resistS": "E",
+      "strModifier": 0,
+      "dexPenalty": 0,
+      "intModifier": 19
+    },
+    {
+      "name": "Sword of the Black King",
+      "numDice": 3,
+      "dieSize": 15,
+      "critMultiplier": 2.0,
+      "critChance": 11,
+      "damageType": "S",
+      "durability": 1433,
+      "isTwoHanded": false,
+      "blockChance": 0.54,
+      "damageReduction": 23,
+      "resistB": "A",
+      "resistP": "G",
+      "resistS": "E",
+      "strModifier": 0,
+      "dexPenalty": 1,
+      "intModifier": 0
+    },
+    {
+      "name": "General's Mace",
+      "numDice": 3,
+      "dieSize": 16,
+      "critMultiplier": 2.0,
+      "critChance": 10,
+      "damageType": "BP",
+      "durability": 509,
+      "isTwoHanded": false,
+      "blockChance": 0.08,
+      "damageReduction": 10,
+      "resistB": "G",
+      "resistP": "A",
+      "resistS": "G",
+      "strModifier": 1,
+      "dexPenalty": 0,
+      "intModifier": 0
+    },
+    {
+      "name": "Thorn",
+      "numDice": 4,
+      "dieSize": 7,
+      "critMultiplier": 4.0,
+      "critChance": 31,
+      "damageType": "PS",
+      "durability": 620,
+      "isTwoHanded": false,
+      "blockChance": 0.16,
+      "damageReduction": 13,
+      "resistB": "M",
+      "resistP": "P",
+      "resistS": "A",
+      "strModifier": 0,
+      "dexPenalty": 4,
+      "intModifier": 0
+    },
+    {
+      "name": "Valor",
+      "numDice": 2,
+      "dieSize": 20,
+      "critMultiplier": 2.5,
+      "critChance": 24,
+      "damageType": "BS",
+      "durability": 1066,
+      "isTwoHanded": false,
+      "blockChance": 0.38,
+      "damageReduction": 19,
+      "resistB": "G",
+      "resistP": "A",
+      "resistS": "E",
+      "strModifier": 0,
+      "dexPenalty": 0,
+      "intModifier": 0
+    },
+    {
+      "name": "Spear of Il'Kalet",
+      "numDice": 6,
+      "dieSize": 9,
+      "critMultiplier": 2.0,
+      "critChance": 8,
+      "damageType": "PS",
+      "durability": 1291,
+      "isTwoHanded": true,
+      "blockChance": 0.39,
+      "damageReduction": 15,
+      "resistB": "A",
+      "resistP": "G",
+      "resistS": "G",
+      "strModifier": 0,
+      "dexPenalty": 2,
+      "intModifier": 0
+    },
+    {
+      "name": "Wrath of Bellezar",
+      "numDice": 7,
+      "dieSize": 6,
+      "critMultiplier": 2.0,
+      "critChance": 10,
+      "damageType": "BS",
+      "durability": 1291,
+      "isTwoHanded": true,
+      "blockChance": 0.36,
+      "damageReduction": 20,
+      "resistB": "G",
+      "resistP": "A",
+      "resistS": "G",
+      "strModifier": 2,
+      "dexPenalty": 0,
+      "intModifier": 0
+    },
+    {
+      "name": "Catastrophe of Truth",
+      "numDice": 7,
+      "dieSize": 6,
+      "critMultiplier": 2.0,
+      "critChance": 8,
+      "damageType": "BP",
+      "durability": 1263,
+      "isTwoHanded": true,
+      "blockChance": 0.32,
+      "damageReduction": 17,
+      "resistB": "G",
+      "resistP": "G",
+      "resistS": "A",
+      "strModifier": 3,
+      "dexPenalty": 0,
+      "intModifier": 0
+    },
+    {
+      "name": "Iron Sword",
+      "numDice": 1,
+      "dieSize": 8,
+      "critMultiplier": 2.0,
+      "critChance": 10,
+      "damageType": "S",
+      "durability": 100,
+      "isTwoHanded": false,
+      "blockChance": 0.1,
+      "damageReduction": 5,
+      "resistB": "A",
+      "resistP": "A",
+      "resistS": "A",
+      "strModifier": 0,
+      "dexPenalty": 0,
+      "intModifier": 0
+    },
+    {
+      "name": "Rusty Dagger",
+      "numDice": 1,
+      "dieSize": 4,
+      "critMultiplier": 2.0,
+      "critChance": 15,
+      "damageType": "P",
+      "durability": 50,
+      "isTwoHanded": false,
+      "blockChance": 0.05,
+      "damageReduction": 2,
+      "resistB": "A",
+      "resistP": "A",
+      "resistS": "A",
+      "strModifier": 0,
+      "dexPenalty": 0,
+      "intModifier": 0
+    }
+  ],
+  "shields": [
+    {
+      "name": "Final Favor",
+      "durability": 1042,
+      "blockChance": 0.60,
+      "damageReduction": 25,
+      "resistB": "P",
+      "resistP": "E",
+      "resistS": "E",
+      "strModifier": 0,
+      "dexPenalty": 2,
+      "intModifier": 0
+    },
+    {
+      "name": "Shield of Evalach",
+      "durability": 1042,
+      "blockChance": 0.55,
+      "damageReduction": 25,
+      "resistB": "G",
+      "resistP": "G",
+      "resistS": "A",
+      "strModifier": 0,
+      "dexPenalty": 0,
+      "intModifier": 0
+    }
+  ],
+  "armor": {
+    "helmet": [
+      {
+        "name": "Helm of the Black King",
+        "durability": 683,
+        "blockChance": 0.99,
+        "damageReduction": 28,
+        "resistB": "G",
+        "resistP": "A",
+        "resistS": "E",
+        "strModifier": 0,
+        "dexPenalty": 0,
+        "intModifier": 0
+      },
+      {
+        "name": "Grace of IK",
+        "durability": 683,
+        "blockChance": 0.99,
+        "damageReduction": 30,
+        "resistB": "E",
+        "resistP": "G",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 0,
+        "intModifier": 0
+      },
+      {
+        "name": "Dreadmesh",
+        "durability": 683,
+        "blockChance": 0.98,
+        "damageReduction": 26,
+        "resistB": "G",
+        "resistP": "E",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 1,
+        "intModifier": 0,
+        "coversSlots": ["legs"]
+      },
+      {
+        "name": "Sunken Crown",
+        "durability": 296,
+        "blockChance": 0.98,
+        "damageReduction": 30,
+        "resistB": "E",
+        "resistP": "G",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 2,
+        "intModifier": 2
+      }
+    ],
+    "chest": [
+      {
+        "name": "Full-Plate of the Black King",
+        "durability": 1665,
+        "blockChance": 0.97,
+        "damageReduction": 32,
+        "resistB": "G",
+        "resistP": "A",
+        "resistS": "E",
+        "strModifier": 3,
+        "dexPenalty": 3,
+        "intModifier": 0,
+        "coversSlots": ["legs"]
+      },
+      {
+        "name": "Crusader",
+        "durability": 2592,
+        "blockChance": 1.0,
+        "damageReduction": 35,
+        "resistB": "G",
+        "resistP": "A",
+        "resistS": "E",
+        "strModifier": 1,
+        "dexPenalty": 1,
+        "intModifier": 0,
+        "coversSlots": ["legs"]
+      },
+      {
+        "name": "IK Chest",
+        "durability": 1000,
+        "blockChance": 0.98,
+        "damageReduction": 31,
+        "resistB": "E",
+        "resistP": "G",
+        "resistS": "A",
+        "strModifier": 3,
+        "dexPenalty": 3,
+        "intModifier": 0
+      },
+      {
+        "name": "Sealord's Armor",
+        "durability": 1000,
+        "blockChance": 1.0,
+        "damageReduction": 38,
+        "resistB": "A",
+        "resistP": "E",
+        "resistS": "E",
+        "strModifier": 0,
+        "dexPenalty": 0,
+        "intModifier": 0
+      }
+    ],
+    "shirt": [
+      {
+        "name": "Mithril of the Black King",
+        "durability": 417,
+        "blockChance": 0.99,
+        "damageReduction": 23,
+        "resistB": "P",
+        "resistP": "E",
+        "resistS": "G",
+        "strModifier": 0,
+        "dexPenalty": 0,
+        "intModifier": 0
+      },
+      {
+        "name": "Glacial Pelt",
+        "durability": 274,
+        "blockChance": 0.98,
+        "damageReduction": 26,
+        "resistB": "G",
+        "resistP": "A",
+        "resistS": "E",
+        "strModifier": 0,
+        "dexPenalty": 0,
+        "intModifier": 0
+      }
+    ],
+    "legs": [
+      {
+        "name": "IK Legs",
+        "durability": 1000,
+        "blockChance": 0.98,
+        "damageReduction": 31,
+        "resistB": "E",
+        "resistP": "G",
+        "resistS": "A",
+        "strModifier": 2,
+        "dexPenalty": 2,
+        "intModifier": 0
+      },
+      {
+        "name": "Sealord's Greaves",
+        "durability": 800,
+        "blockChance": 0.95,
+        "damageReduction": 28,
+        "resistB": "A",
+        "resistP": "E",
+        "resistS": "E",
+        "strModifier": 0,
+        "dexPenalty": 0,
+        "intModifier": 0
+      }
+    ],
+    "gloves": [
+      {
+        "name": "Gauntlets of the Black King",
+        "durability": 512,
+        "blockChance": 0.99,
+        "damageReduction": 28,
+        "resistB": "E",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 1,
+        "dexPenalty": 1,
+        "intModifier": 0
+      },
+      {
+        "name": "Desert Prince's Warfists",
+        "durability": 605,
+        "blockChance": 0.99,
+        "damageReduction": 25,
+        "resistB": "P",
+        "resistP": "G",
+        "resistS": "E",
+        "strModifier": 1,
+        "dexPenalty": 1,
+        "intModifier": 0
+      },
+      {
+        "name": "IK Gloves",
+        "durability": 605,
+        "blockChance": 0.99,
+        "damageReduction": 31,
+        "resistB": "G",
+        "resistP": "E",
+        "resistS": "A",
+        "strModifier": 1,
+        "dexPenalty": 1,
+        "intModifier": 0
+      }
+    ],
+    "boots": [
+      {
+        "name": "Boots of the Black King",
+        "durability": 553,
+        "blockChance": 0.97,
+        "damageReduction": 30,
+        "resistB": "E",
+        "resistP": "P",
+        "resistS": "E",
+        "strModifier": 0,
+        "dexPenalty": 2,
+        "intModifier": 0
+      },
+      {
+        "name": "IK Boots",
+        "durability": 1000,
+        "blockChance": 0.98,
+        "damageReduction": 31,
+        "resistB": "E",
+        "resistP": "G",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 0,
+        "intModifier": 0
+      },
+      {
+        "name": "Worm Sign",
+        "durability": 1000,
+        "blockChance": 1.0,
+        "damageReduction": 27,
+        "resistB": "G",
+        "resistP": "G",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 1,
+        "intModifier": 8
+      }
+    ]
+  },
+  "accessories": {
+    "necklace": [
+      {
+        "name": "Chaotic Rage",
+        "durability": 68,
+        "blockChance": 0.65,
+        "damageReduction": 5,
+        "resistB": "G",
+        "resistP": "G",
+        "resistS": "A",
+        "strModifier": 7,
+        "dexPenalty": 3,
+        "intModifier": 8
+      },
+      {
+        "name": "Clouds of Chaos",
+        "durability": 61,
+        "blockChance": 0.44,
+        "damageReduction": 3,
+        "resistB": "G",
+        "resistP": "A",
+        "resistS": "G",
+        "strModifier": 0,
+        "dexPenalty": 1,
+        "intModifier": 10
+      },
+      {
+        "name": "Wendigo's Fury",
+        "durability": 69,
+        "blockChance": 0.38,
+        "damageReduction": 12,
+        "resistB": "A",
+        "resistP": "G",
+        "resistS": "G",
+        "strModifier": 12,
+        "dexPenalty": 1,
+        "intModifier": 0
+      },
+      {
+        "name": "Gol'ShLanek's Forbearance",
+        "durability": 281,
+        "blockChance": 0.34,
+        "damageReduction": 10,
+        "resistB": "A",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 3,
+        "intModifier": 0
+      },
+      {
+        "name": "Angel's Torc",
+        "durability": 280,
+        "blockChance": 0.51,
+        "damageReduction": 11,
+        "resistB": "A",
+        "resistP": "G",
+        "resistS": "G",
+        "strModifier": 0,
+        "dexPenalty": 1,
+        "intModifier": 0
+      }
+    ],
+    "ring1": [
+      {
+        "name": "Planar Ring",
+        "durability": 43,
+        "blockChance": 0.11,
+        "damageReduction": 1,
+        "resistB": "A",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 3,
+        "intModifier": 1
+      },
+      {
+        "name": "Ring of Resistance",
+        "durability": 11,
+        "blockChance": 0.06,
+        "damageReduction": 29,
+        "resistB": "M",
+        "resistP": "E",
+        "resistS": "M",
+        "strModifier": 0,
+        "dexPenalty": 4,
+        "intModifier": 0
+      },
+      {
+        "name": "Emerald Ring of Il'Kalet",
+        "durability": 145,
+        "blockChance": 0.08,
+        "damageReduction": 12,
+        "resistB": "A",
+        "resistP": "P",
+        "resistS": "M",
+        "strModifier": 0,
+        "dexPenalty": 3,
+        "intModifier": 0
+      }
+    ],
+    "ring2": [
+      {
+        "name": "Planar Ring",
+        "durability": 43,
+        "blockChance": 0.11,
+        "damageReduction": 1,
+        "resistB": "A",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 3,
+        "intModifier": 1
+      },
+      {
+        "name": "Ring of Resistance",
+        "durability": 11,
+        "blockChance": 0.06,
+        "damageReduction": 29,
+        "resistB": "M",
+        "resistP": "E",
+        "resistS": "M",
+        "strModifier": 0,
+        "dexPenalty": 4,
+        "intModifier": 0
+      }
+    ]
+  },
+  "presets": {
+    "enemies": {
+      "The Black King": {
+        "name": "The Black King",
+        "baseStr": 13.0,
+        "baseDex": 13.0,
+        "baseInt": 13.0,
+        "baseHp": 70,
+        "gear": {
+          "helmet": "Helm of the Black King",
+          "chest": "Full-Plate of the Black King",
+          "shirt": "Mithril of the Black King",
+          "legs": "Full-Plate of the Black King",
+          "gloves": "Gauntlets of the Black King",
+          "boots": "Boots of the Black King",
+          "mainhand": "Sword of the Black King",
+          "offhand": "Empty",
+          "necklace": "Empty",
+          "ring1": "Empty",
+          "ring2": "Empty"
+        }
+      },
+      "Triton": {
+        "name": "Triton",
+        "baseStr": 16.82,
+        "baseDex": 10.55,
+        "baseInt": 11.33,
+        "baseHp": 216,
+        "gear": {
+          "helmet": "Sunken Crown",
+          "chest": "Sealord's Armor",
+          "shirt": "Empty",
+          "legs": "Sealord's Armor",
+          "gloves": "Sealord's Armor",
+          "boots": "Sealord's Armor",
+          "mainhand": "Catastrophe of Truth",
+          "offhand": "Empty",
+          "necklace": "Empty",
+          "ring1": "Empty",
+          "ring2": "Empty"
+        }
+      },
+      "Desert Prince": {
+        "name": "Desert Prince",
+        "baseStr": 14.0,
+        "baseDex": 12.0,
+        "baseInt": 10.0,
+        "baseHp": 150,
+        "gear": {
+          "helmet": "Grace of IK",
+          "chest": "Crusader",
+          "shirt": "Empty",
+          "legs": "Crusader",
+          "gloves": "Desert Prince's Warfists",
+          "boots": "IK Boots",
+          "mainhand": "Aurora",
+          "offhand": "Final Favor",
+          "necklace": "Wendigo's Fury",
+          "ring1": "Emerald Ring of Il'Kalet",
+          "ring2": "Empty"
+        }
+      }
+    },
+    "loadouts": {}
+  },
+  "setBuffs": [
+    {"name": "Pumped (x1)", "stat": "str", "flatValue": 0, "pctValue": 10},
+    {"name": "Pumped (x1)", "stat": "dex", "flatValue": 0, "pctValue": 10},
+    {"name": "Pumped (x1)", "stat": "int", "flatValue": 0, "pctValue": 5},
+    {"name": "Pumped (x2)", "stat": "str", "flatValue": 0, "pctValue": 20},
+    {"name": "Pumped (x2)", "stat": "dex", "flatValue": 0, "pctValue": 20},
+    {"name": "Pumped (x2)", "stat": "int", "flatValue": 0, "pctValue": 10},
+    {"name": "Pumped (x3)", "stat": "str", "flatValue": 0, "pctValue": 30},
+    {"name": "Pumped (x3)", "stat": "dex", "flatValue": 0, "pctValue": 30},
+    {"name": "Pumped (x3)", "stat": "int", "flatValue": 0, "pctValue": 15},
+    {"name": "Well Rested", "stat": "str", "flatValue": 0, "pctValue": 10},
+    {"name": "Mysterious Berry", "stat": "int", "flatValue": 0, "pctValue": 25},
+    {"name": "Strange Elixir", "stat": "str", "flatValue": 0, "pctValue": 15},
+    {"name": "Strange Elixir", "stat": "dex", "flatValue": 0, "pctValue": 10},
+    {"name": "Strange Elixir", "stat": "int", "flatValue": 0, "pctValue": -10},
+    {"name": "Witch's Hat", "stat": "int", "flatValue": 1, "pctValue": 0},
+    {"name": "Angel's Trumpet", "stat": "int", "flatValue": 0, "pctValue": 5},
+    {"name": "Demonic Clarion", "stat": "str", "flatValue": 0, "pctValue": 5},
+    {"name": "Fallen Bugle", "stat": "dex", "flatValue": 0, "pctValue": 5},
+    {"name": "Spiritual Vision", "stat": "int", "flatValue": 0, "pctValue": 5}
+  ]
+}
