@@ -99,15 +99,19 @@ export class Item {
 
     calcDamageReduction(damage, damageTypes) {
         if (!damageTypes || damageTypes.length === 0) return 0;
+        
         const typed = damageTypes.filter(d => d !== 'T');
         let reduction = 0;
+        
         if (typed.length > 0) {
-            const bestForAttacker = Math.min(...typed.map(d => this.getResist(d)));
-            reduction = this.damageReduction * bestForAttacker;
+            const worstResist = Math.min(...typed.map(d => this.getResist(d)));
+            reduction = this.damageReduction * worstResist;
         }
+        
         if (damageTypes.includes('T')) {
             reduction += this.damageReduction;
         }
+        
         return Math.round(reduction);
     }
 

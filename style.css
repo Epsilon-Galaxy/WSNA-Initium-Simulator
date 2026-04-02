@@ -596,6 +596,32 @@ h4 { font-size: 0.95rem; }
     color: #d45a5a;
 }
 
+.log-entry.log-player {
+    border-left: 3px solid #4a8bc2;
+    padding-left: 8px;
+    background: rgba(74, 139, 194, 0.08);
+}
+
+.log-entry.log-enemy {
+    border-left: 3px solid #c24a4a;
+    padding-left: 8px;
+    background: rgba(194, 74, 74, 0.08);
+}
+
+.log-entry.log-player.damage {
+    color: #6eb5ff;
+}
+
+.log-entry.log-enemy.damage {
+    color: #ff6e6e;
+}
+
+.log-entry.log-player.crit, .log-entry.log-enemy.crit {
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
 /* Combat Preview Panel */
 .combat-preview {
     width: 280px;

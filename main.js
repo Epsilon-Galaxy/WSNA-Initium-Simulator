@@ -518,7 +518,13 @@ function clearLog() {
 function addLogEntry(entry) {
     const logContent = document.getElementById('log-content');
     const div = document.createElement('div');
-    div.className = 'log-entry ' + (entry.type || 'action');
+    let classes = 'log-entry ' + (entry.type || 'action');
+    if (entry.attacker === 'player') {
+        classes += ' log-player';
+    } else if (entry.attacker === 'enemy') {
+        classes += ' log-enemy';
+    }
+    div.className = classes;
     div.textContent = entry.text;
     logContent.insertBefore(div, logContent.firstChild);
 }

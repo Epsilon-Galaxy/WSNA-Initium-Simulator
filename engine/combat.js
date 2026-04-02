@@ -50,12 +50,12 @@ export function rollBodyPart() {
     return 'boots';
 }
 
-export function resolveItemBlock(item, damage, damageTypes, log = null) {
+export function resolveItemBlock(item, damage, damageTypes, log = null, slotName = null) {
     if (item.isEmpty() || item.isBroken()) {
-        return { remaining: damage, blocked: false, blockedAmount: 0 };
+        return { remaining: damage, blocked: false, blockedAmount: 0, slot: slotName };
     }
     if (Math.random() >= item.blockChance) {
-        return { remaining: damage, blocked: false, blockedAmount: 0 };
+        return { remaining: damage, blocked: false, blockedAmount: 0, slot: slotName };
     }
 
     item.currentDurability -= 1;
@@ -69,26 +69,30 @@ export function resolveItemBlock(item, damage, damageTypes, log = null) {
         blockedAmount: reduction,
         itemName: item.name,
         durability: item.currentDurability,
-        broken
+        broken,
+        slot: slotName
     };
 }
 
 export function resolveDamageChain(defender, damage, damageTypes, log = null) {
     let remaining = damage;
     const blockedItems = [];
+    const failedBlocks = [];
 
     const blockOrder = ['mainhand', 'offhand', 'ring1', 'ring2', 'necklace'];
     for (const slot of blockOrder) {
         if (remaining <= 0) break;
         const item = defender.gear[slot];
         if (item && !item.isEmpty() && !item.isBroken()) {
-            const result = resolveItemBlock(item, remaining, damageTypes, log);
+            const result = resolveItemBlock(item, remaining, damageTypes, log, slot);
             if (result.blocked) {
                 remaining = result.remaining;
                 blockedItems.push(result);
                 if (result.broken) {
                     blockedItems[blockedItems.length - 1].broken = true;
                 }
+            } else if (!item.isEmpty()) {
+                failedBlocks.push({ slot: slot, itemName: item.name });
             }
             if (result.blocked && item.isWeapon && item.isTwoHanded) {
                 const mh = defender.gear['mainhand'];
@@ -103,32 +107,36 @@ export function resolveDamageChain(defender, damage, damageTypes, log = null) {
     }
 
     if (remaining <= 0) {
-        return { damage: 0, blockedItems, fullyBlocked: true };
+        return { damage: 0, blockedItems, failedBlocks, fullyBlocked: true };
     }
 
     const bodySlot = rollBodyPart();
     const bodyItem = defender.gear[bodySlot];
     if (bodyItem && !bodyItem.isEmpty() && !bodyItem.isBroken()) {
-        const result = resolveItemBlock(bodyItem, remaining, damageTypes, log);
+        const result = resolveItemBlock(bodyItem, remaining, damageTypes, log, bodySlot);
         if (result.blocked) {
             remaining = result.remaining;
             blockedItems.push(result);
+        } else {
+            failedBlocks.push({ slot: bodySlot, itemName: bodyItem.name });
         }
     }
 
     if (bodySlot === 'chest' && remaining > 0) {
         const shirt = defender.gear['shirt'];
         if (shirt && !shirt.isEmpty() && !shirt.isBroken()) {
-            const result = resolveItemBlock(shirt, remaining, damageTypes, log);
+            const result = resolveItemBlock(shirt, remaining, damageTypes, log, 'shirt');
             if (result.blocked) {
                 remaining = result.remaining;
                 blockedItems.push(result);
+            } else {
+                failedBlocks.push({ slot: 'shirt', itemName: shirt.name });
             }
         }
     }
 
     const final = Math.max(0, remaining);
-    return { damage: final, blockedItems, fullyBlocked: remaining <= 0 };
+    return { damage: final, blockedItems, failedBlocks, fullyBlocked: remaining <= 0, bodySlotHit: bodySlot };
 }
 
 export function resolveAttack(attacker, defender, weapon, log = null) {
@@ -155,7 +163,9 @@ export function resolveAttack(attacker, defender, weapon, log = null) {
         strBonus,
         damageTypes: dmgTypes,
         blockedItems: damageResult.blockedItems,
+        failedBlocks: damageResult.failedBlocks,
         fullyBlocked: damageResult.fullyBlocked,
+        bodySlotHit: damageResult.bodySlotHit,
         weaponName: weapon.name
     };
 }
