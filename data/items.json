@@ -206,42 +206,6 @@
       "strModifier": 3,
       "dexPenalty": 0,
       "intModifier": 0
-    },
-    {
-      "name": "Iron Sword",
-      "numDice": 1,
-      "dieSize": 8,
-      "critMultiplier": 2.0,
-      "critChance": 10,
-      "damageType": "S",
-      "durability": 100,
-      "isTwoHanded": false,
-      "blockChance": 0.1,
-      "damageReduction": 5,
-      "resistB": "A",
-      "resistP": "A",
-      "resistS": "A",
-      "strModifier": 0,
-      "dexPenalty": 0,
-      "intModifier": 0
-    },
-    {
-      "name": "Rusty Dagger",
-      "numDice": 1,
-      "dieSize": 4,
-      "critMultiplier": 2.0,
-      "critChance": 15,
-      "damageType": "P",
-      "durability": 50,
-      "isTwoHanded": false,
-      "blockChance": 0.05,
-      "damageReduction": 2,
-      "resistB": "A",
-      "resistP": "A",
-      "resistS": "A",
-      "strModifier": 0,
-      "dexPenalty": 0,
-      "intModifier": 0
     }
   ],
   "shields": [
@@ -320,6 +284,18 @@
         "strModifier": 0,
         "dexPenalty": 2,
         "intModifier": 2
+      },
+      {
+        "name": "Protector's Helm",
+        "durability": 400,
+        "blockChance": 0.92,
+        "damageReduction": 32,
+        "resistB": "A",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 2,
+        "intModifier": 0
       }
     ],
     "chest": [
@@ -371,6 +347,18 @@
         "resistS": "E",
         "strModifier": 0,
         "dexPenalty": 0,
+        "intModifier": 0
+      },
+      {
+        "name": "Protector's Chest",
+        "durability": 400,
+        "blockChance": 0.92,
+        "damageReduction": 32,
+        "resistB": "A",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 2,
         "intModifier": 0
       }
     ],
@@ -424,6 +412,18 @@
         "strModifier": 0,
         "dexPenalty": 0,
         "intModifier": 0
+      },
+            {
+        "name": "Protector's Leggings",
+        "durability": 400,
+        "blockChance": 0.92,
+        "damageReduction": 32,
+        "resistB": "A",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 2,
+        "intModifier": 0
       }
     ],
     "gloves": [
@@ -461,6 +461,18 @@
         "resistS": "A",
         "strModifier": 0,
         "dexPenalty": 1,
+        "intModifier": 0
+      },
+      {
+        "name": "Protector's Gloves",
+        "durability": 400,
+        "blockChance": 0.92,
+        "damageReduction": 32,
+        "resistB": "A",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 2,
         "intModifier": 0
       }
     ],
@@ -500,6 +512,18 @@
         "strModifier": 0,
         "dexPenalty": 1,
         "intModifier": 8
+      },
+      {
+        "name": "Protector's Boots",
+        "durability": 400,
+        "blockChance": 0.92,
+        "damageReduction": 32,
+        "resistB": "A",
+        "resistP": "A",
+        "resistS": "A",
+        "strModifier": 0,
+        "dexPenalty": 2,
+        "intModifier": 0
       }
     ]
   },
