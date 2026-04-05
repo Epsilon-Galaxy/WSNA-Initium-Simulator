@@ -250,7 +250,7 @@ function showCombatPreview(item, slot, charType) {
     if (previewEditMode) {
         html += `<div class="preview-edit-section">`;
         html += `<div class="preview-line"><label>STR: <input type="number" class="edit-input" data-field="strModifier" value="${item.strModifier}"></label></div>`;
-        html += `<div class="preview-line"><label>DEX: <input type="number" class="edit-input" data-field="dexPenalty" value="${item.dexPenalty}" min="0"></label></div>`;
+        html += `<div class="preview-line"><label>DEX Pen: <input type="number" class="edit-input" data-field="dexPenalty" value="${item.dexPenalty}"></label></div>`;
         html += `<div class="preview-line"><label>INT: <input type="number" class="edit-input" data-field="intModifier" value="${item.intModifier}"></label></div>`;
         
         if (item.isWeapon) {
@@ -272,8 +272,9 @@ function showCombatPreview(item, slot, charType) {
         html += `<button class="btn btn-small" onclick="toggleCombatEditMode()">Cancel</button>`;
         html += `</div>`;
     } else {
-        if (item.dexPenalty > 0) {
-            html += `<div class="preview-line">DEX -${item.dexPenalty}%</div>`;
+        if (item.dexPenalty !== 0) {
+            const sign = item.dexPenalty > 0 ? '-' : '+';
+            html += `<div class="preview-line">DEX Pen ${sign}${Math.abs(item.dexPenalty)}</div>`;
         }
 
         if (item.strModifier !== 0) {
@@ -552,7 +553,10 @@ function renderCharacterSummary(char, charType) {
                 if (item.damageReduction > 0) parts.push(`DR${item.damageReduction}`);
                 if (item.blockChance > 0) parts.push(`BC${Math.round(item.blockChance * 100)}%`);
                 if (item.strModifier !== 0) parts.push(`STR${item.strModifier > 0 ? '+' : ''}${item.strModifier}`);
-                if (item.dexPenalty !== 0) parts.push(`DEX-${item.dexPenalty}`);
+                if (item.dexPenalty !== 0) {
+                    const sign = item.dexPenalty > 0 ? '-' : '+';
+                    parts.push(`DEX Pen${sign}${Math.abs(item.dexPenalty)}`);
+                }
                 statsText = parts.join(' | ') || 'Armor';
             }
             
@@ -690,8 +694,9 @@ function showSearchItemPreview(item) {
     let html = `<div class="preview-name">${item.name}</div>`;
     html += `<div class="preview-slot-type">${SLOT_DISPLAY[item.slot] || item.slot}</div>`;
 
-    if (item.dexPenalty > 0) {
-        html += `<div class="preview-line">DEX -${item.dexPenalty}</div>`;
+    if (item.dexPenalty !== 0) {
+        const sign = item.dexPenalty > 0 ? '-' : '+';
+        html += `<div class="preview-line">DEX Pen ${sign}${Math.abs(item.dexPenalty)}</div>`;
     }
 
     if (item.strModifier !== 0) {
@@ -839,7 +844,7 @@ function updateItemPreview(editMode = true) {
     html += `<div class="preview-slot-type">${SLOT_DISPLAY[item.slot] || item.slot}</div>`;
 
     html += `<div class="preview-line">`;
-    html += `DEX <input type="number" class="preview-edit" data-field="dexPenalty" value="${item.dexPenalty}" min="0" style="width:50px">%`;
+    html += `DEX Pen <input type="number" class="preview-edit" data-field="dexPenalty" value="${item.dexPenalty}" style="width:50px">`;
     html += `</div>`;
 
     html += `<div class="preview-line">`;

@@ -140,7 +140,8 @@ export class Item {
             stats.push({ label: 'STR', value: (this.strModifier > 0 ? '+' : '') + this.strModifier });
         }
         if (this.dexPenalty !== 0) {
-            stats.push({ label: 'DEX', value: '-' + this.dexPenalty });
+            const sign = this.dexPenalty > 0 ? '-' : '+';
+            stats.push({ label: 'DEX Pen', value: sign + Math.abs(this.dexPenalty) });
         }
         if (this.intModifier !== 0) {
             stats.push({ label: 'INT', value: (this.intModifier > 0 ? '+' : '') + this.intModifier });

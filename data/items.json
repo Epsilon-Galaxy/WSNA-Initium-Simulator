@@ -113,7 +113,7 @@
       "resistB": "G",
       "resistP": "A",
       "resistS": "G",
-      "strModifier": 1,
+      "strModifier": 0,
       "dexPenalty": 0,
       "intModifier": 0
     },
@@ -307,7 +307,7 @@
         "strModifier": 0,
         "dexPenalty": 1,
         "intModifier": 0,
-        "coversSlots": ["legs"]
+        "coversSlots": ["shirt"]
       },
       {
         "name": "Sunken Crown",
@@ -447,7 +447,7 @@
         "resistB": "P",
         "resistP": "G",
         "resistS": "E",
-        "strModifier": 1,
+        "strModifier": 0,
         "dexPenalty": 1,
         "intModifier": 0
       },
@@ -459,7 +459,7 @@
         "resistB": "G",
         "resistP": "E",
         "resistS": "A",
-        "strModifier": 1,
+        "strModifier": 0,
         "dexPenalty": 1,
         "intModifier": 0
       }
